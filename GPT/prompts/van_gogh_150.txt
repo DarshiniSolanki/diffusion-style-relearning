@@ -1,0 +1,38 @@
+Generate a speculative set of downstream fine-tuning data for a target style theme: Van Gogh.
+
+Task:
+- Infer 10 semantically related concepts for this target style.
+- Order them from most closely related to less directly related but still plausible.
+- For each concept, generate 15 distinct prompts suitable for SD3 fine-tuning.
+
+Constraints:
+- Do not use “Van Gogh,” any other artist name, or exact painting titles inside the prompts.
+- The prompts should help indirectly recover the target style rather than refer to it explicitly.
+- Each prompt should be concrete, visual, and natural as a text-to-image training caption.
+- Keep them varied primarily in scene content, viewpoint, and composition. Vary lighting, season, and mood only when it helps scene diversity.
+- Avoid repeated prompt templates, repeated scene wrappers, and repeated composition anchors across prompts.
+- Each prompt should preserve a painterly signal through medium or texture cues, not only motifs.  
+- Use concise painterly cues consistently, but do not force the same medium words to appear in every prompt.  
+- Avoid photographic or cinematic phrasing.
+- Each prompt must be a genuinely different scene, not a wrapper-based paraphrase of another prompt.
+
+For each of the 10 concepts, output:
+1. Concept name
+2. One-sentence reason why this concept is semantically related to the target style
+3. 15 prompts
+
+Format:
+- Output both:  
+1. a Markdown file  
+2. a CSV file  
+- In the Markdown version, keep the concept name, the one-sentence reason, the 15 bullet-point prompts for each concept, and no additional information like headers.  
+- In the CSV version, do not include the one-sentence reason.  
+- The CSV must contain exactly these columns:  
+concept_rank,concept_name,prompt_id,prompt  
+- Use one CSV row per prompt.
+  
+Validation requirements:  
+- Before producing the final output, verify that each of the 10 concepts has exactly 15 prompts.  
+- Verify that the CSV contains exactly 150 data rows in total, excluding the header.  
+- Must verify that none of the generated prompts is likely to produce a photographic, cinematic, or otherwise realism-biased image when used with a Stable Diffusion model, and you must rewrite any prompt that fails this check before outputting.
+- If any concept has fewer or more than 15 prompts, fix it before outputting.
