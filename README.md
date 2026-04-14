@@ -107,7 +107,7 @@ A compact experimental study showing whether style erasure is stable under indir
 ## Main Experiment
 Qualitative comparison across the original, unlearned, and relearned models shows that style recovery is observable for several prompts. In these cases, the relearned model restores painterly color relationships, composition patterns, and motif-level features that were weakened after unlearning. This suggests that style erasure is not fully stable under downstream fine-tuning and that Van Gogh-like features can re-emerge through synthetic concept-based data.
 
-![](/data/images/comparison_grid_150.png)
+![](/data/images/mini_comparison_grid_150.png)
 
 
 ## Supplementary Observation
