@@ -141,6 +141,8 @@ The CLIP results showed the same overall trend:
 
 The specificity scores also suggest that the relearned model is not merely painterly in a generic sense, but regains some Van Gogh-specific alignment compared with the unlearned model.
 
+See `style_relearning_evaluation.ipynb` for the full evaluation pipeline and detailed results.
+
 ### Conclusion
 
 Both the blind LLM evaluation and the CLIP supplementary evaluation support the same conclusion:
