@@ -88,7 +88,66 @@ Instead, later fine-tuning may reconnect style-relevant visual patterns, especia
 5. Evaluate whether Van Gogh-like style traits reappear.
 
 ## Evaluation
-- [ ] TODO
+
+We evaluated style relearning with two methods:
+
+1. Blind LLM evaluation  
+2. CLIP supplementary evaluation
+
+### Blind LLM Evaluation
+
+We created blind comparison panels for each image index using three model outputs:
+- original
+- unlearned
+- relearned_150
+
+The images were shuffled into left / middle / right positions so that the evaluator did not know which model produced which image.
+
+The LLM was asked to:
+- assign a style score to each image
+- identify which image looked most like Van Gogh
+- identify which image looked least like Van Gogh
+- judge whether the style was not relearned, partially relearned, or clearly relearned
+
+#### Main LLM results
+
+- The original model was most frequently judged as the most Van Gogh-like: **26 / 30**
+- The unlearned model was most frequently judged as the least Van Gogh-like: **25 / 30**
+- Relearning status counts:
+  - clearly relearned: **18**
+  - partially relearned: **7**
+  - not relearned: **5**
+
+Average resolved style scores:
+- original: **4.83**
+- unlearned: **1.93**
+- relearned_150: **3.53**
+
+These results suggest that unlearning strongly suppresses Van Gogh-like style, while relearning restores a substantial portion of it.
+
+### CLIP Supplementary Evaluation
+
+We also used CLIP as a supplementary metric.
+
+We measured:
+- similarity to Van Gogh-style prompts
+- similarity to generic painting prompts
+- style specificity = Van Gogh similarity − generic painting similarity
+
+The CLIP results showed the same overall trend:
+- the original model had the strongest alignment with Van Gogh prompts
+- the unlearned model had the weakest alignment
+- the relearned_150 model recovered part of the lost style signal
+
+The specificity scores also suggest that the relearned model is not merely painterly in a generic sense, but regains some Van Gogh-specific alignment compared with the unlearned model.
+
+### Conclusion
+
+Both the blind LLM evaluation and the CLIP supplementary evaluation support the same conclusion:
+
+**original > relearned_150 > unlearned**
+
+This suggests that style unlearning removes Van Gogh-like stylistic traits effectively, while relearning restores them partially but not completely.
 
 ## Risks
 - Prompts may collapse into repeated composition templates
